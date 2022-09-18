@@ -40,7 +40,7 @@ app.post('/api/movies', (req, res) => {
     else
         db.addNewMovie(req.body)
             .then((data) => { res.status(200).json(data) })
-            .cathch((err) => { res.status(500).json({ error: err }) })
+            .cathch((err) => { res.status(500).json({ error: err.message }) })
 })
 
 app.get('/api/movies', (req, res) => {
@@ -52,7 +52,7 @@ app.get('/api/movies', (req, res) => {
                 if (data.length === 0) res.status(204).json({ message: "no data found" })
                 else res.json(data)
             })
-            .catch((err) => { res.status(500).json({ error: err }) })
+            .catch((err) => { res.status(500).json({ error: err.message }) })
 
     }
 })
@@ -63,7 +63,7 @@ app.get('/api/movies/:_id', (req, res) => {
             if (data.length === 0) res.status(204).json({ message: "no data found" })
             else res.json(data)
         })
-        .catch((error) => { res.status(500).json({ error: err }) })
+        .catch((error) => { res.status(500).json({ error: err.message }) })
 })
 
 app.put('/api/movie', (req, res) => {
@@ -71,12 +71,12 @@ app.put('/api/movie', (req, res) => {
     else
         db.updateMovieById(req.body, req.params._id)
             .then(() => { res.status(201).json({ message: "update successfully" }) })
-            .catch((err) => { res.status(500).json({ error: err }) })
+            .catch((err) => { res.status(500).json({ error: err.message }) })
 })
 
 app.delete('/api/movies', (req, res) => {
     db.deleteMovieById(req.params._id)
         .then(() => { res.status(201).json({ message: "data deleted" }) })
-        .catch((err) => { res.status(500).json({ error: err }) })
+        .catch((err) => { res.status(500).json({ error: err.message }) })
 })
 
